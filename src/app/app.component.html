@@ -9,7 +9,10 @@
       <ul class="list-group">
         <li 
         *ngFor="let employee of employeeArray"
-        class="list-group-item list-group-item-action">
+        class="list-group-item list-group-item-action"
+        (click)="openForEdit(employee)"
+        [class.active]="employee == seletedEmployee"
+        >
         <span class="badge badge-primary"> {{employee.id}}</span> {{employee.name}} - {{employee.country}}
         </li>
       </ul>
@@ -26,6 +29,14 @@
           </div>
           <button (click)="addOrEdit()" class="btn btn-primary mt-2">
             Submit
+          </button>
+
+          <button 
+          *ngIf="seletedEmployee.id !== 0"
+          class="btn btn-danger ml-2 mt-2"
+          (click)="delete()"
+          >
+            delete
           </button>
         </div>
       </div>

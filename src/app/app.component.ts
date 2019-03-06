@@ -27,8 +27,22 @@ export class AppComponent {
   seletedEmployee: Employee = new Employee();
 
   addOrEdit(){
-    this.seletedEmployee.id = this.employeeArray.length + 1;
-    this.employeeArray.push(this.seletedEmployee);
+    
+    if(this.seletedEmployee.id == 0){
+      //si no hay ninguno seleccionado insertar
+      this.seletedEmployee.id = this.employeeArray.length + 1;
+      this.employeeArray.push(this.seletedEmployee);
+    }
     this.seletedEmployee = new Employee();
+  }
+  openForEdit(employee:Employee){
+    this.seletedEmployee = employee;
+  }
+  delete(){
+    //si por cada elemento que recorras es distinto al empleado seleccionado dejalo
+    if(confirm('Are yousure you want to delete')){
+      this.employeeArray = this.employeeArray.filter(x => x != this.seletedEmployee);
+      this.seletedEmployee = new Employee();
+    }
   }
 }
